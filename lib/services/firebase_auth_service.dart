@@ -12,7 +12,7 @@ class FirebaseAuthService implements AuthBase {
   @override
   Future<UserModel> currentUser() async {
     User? user = await _firebaseAuth.currentUser;
-    print('firebase user : ' + user.toString());
+    debugPrint('firebase user : ' + user.toString());
     return _userFromFirebase(user);
     //   try {
     // } catch (e) {
@@ -36,7 +36,7 @@ class FirebaseAuthService implements AuthBase {
       UserCredential result = await _firebaseAuth.signInAnonymously();
       return _userFromFirebase(result.user!);
     } catch (e) {
-      print('Signin Anonymously hata ' + e.toString());
+      debugPrint('Signin Anonymously hata ' + e.toString());
       return null;
     }
   }
@@ -52,7 +52,7 @@ class FirebaseAuthService implements AuthBase {
       await _firebaseAuth.signOut();
       return true;
     } catch (e) {
-      print('Sign out hata : ' + e.toString());
+      debugPrint('Sign out hata : ' + e.toString());
       return false;
     }
   }
@@ -93,9 +93,9 @@ class FirebaseAuthService implements AuthBase {
 
       _userData = requestData;
     } else if (result.status == LoginStatus.failed) {
-      print('Firebase Auth service oturum açma hata : ' + result.message!);
+      debugPrint('Firebase Auth service oturum açma hata : ' + result.message!);
     } else if (result.status == LoginStatus.cancelled) {
-      print('Firebase Auth service oturum açma iptal edildi : ' +
+      debugPrint('Firebase Auth service oturum açma iptal edildi : ' +
           result.message!);
     }
 

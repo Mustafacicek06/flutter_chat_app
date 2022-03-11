@@ -4,7 +4,7 @@ import 'package:flutter_chat_app/viewmodel/chat_view_model.dart';
 import 'package:provider/provider.dart';
 
 class Chat extends StatefulWidget {
-  Chat({Key? key}) : super(key: key);
+  const Chat({Key? key}) : super(key: key);
 
   @override
   State<Chat> createState() => _ChatState();
@@ -12,7 +12,7 @@ class Chat extends StatefulWidget {
 
 class _ChatState extends State<Chat> {
   final ScrollController _scrollController = ScrollController();
-  var _messageController = TextEditingController();
+  final _messageController = TextEditingController();
   bool _isLoading = false;
 
   @override
@@ -77,7 +77,7 @@ class _ChatState extends State<Chat> {
   Widget _buildNewMessageEnter() {
     final _chatViewModel = Provider.of<ChatViewModel>(context);
 
-    return Container(
+    return SizedBox(
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8.0, left: 8.0),
         child: Row(
@@ -96,7 +96,7 @@ class _ChatState extends State<Chat> {
                       borderSide: BorderSide.none)),
             )),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 4),
+              margin: const EdgeInsets.symmetric(horizontal: 4),
               child: FloatingActionButton(
                   child: const Icon(
                     Icons.navigation,

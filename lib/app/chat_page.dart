@@ -50,7 +50,7 @@ class _ChatPageState extends State<ChatPage> {
                                               userID: currentChat.interlocutor,
                                               profilUrl: currentChat
                                                   .interlocutorProfilUrl)),
-                                      child: Chat(),
+                                      child: const Chat(),
                                     )));
                       },
                       child: ListTile(

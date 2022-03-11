@@ -16,7 +16,7 @@ import 'package:timeago/timeago.dart' as timeago;
 // test modda fakeAuthServiceyi çağır
 // release modda firebaseAuthServiceyi çağır
 // Test aşamalarının kontrolünü'de sağlamış olduk
-enum AppMode { DEBUGMODE, RELEASEMODE }
+enum AppMode { debugmode, releasemode }
 
 class UserRepository implements AuthBase {
   // firebase ' e mi gideyim fake e mi gideyim ?
@@ -31,10 +31,10 @@ class UserRepository implements AuthBase {
 
   List<UserModel> allUserList = [];
 
-  AppMode appMode = AppMode.RELEASEMODE;
+  AppMode appMode = AppMode.releasemode;
   @override
   Future<UserModel?> currentUser() async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return await _fakeAuthService.currentUser();
     } else {
       UserModel _user = await _firebaseAuthService.currentUser();
@@ -47,7 +47,7 @@ class UserRepository implements AuthBase {
 
   @override
   Future<UserModel?> signInAnonymously() async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return await _fakeAuthService.signInAnonymously();
     } else {
       return await _firebaseAuthService.signInAnonymously();
@@ -56,7 +56,7 @@ class UserRepository implements AuthBase {
 
   @override
   Future<bool> signOut() async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return await _fakeAuthService.signOut();
     } else {
       return await _firebaseAuthService.signOut();
@@ -65,7 +65,7 @@ class UserRepository implements AuthBase {
 
   @override
   Future<UserModel> signInWithGoogle() async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return await _fakeAuthService.signInWithGoogle();
     } else {
       UserModel _user = await _firebaseAuthService.signInWithGoogle();
@@ -77,7 +77,7 @@ class UserRepository implements AuthBase {
 
   @override
   Future<UserModel> signInWithFacebook() async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return await _fakeAuthService.signInWithFacebook();
     } else {
       UserModel _user = await _firebaseAuthService.signInWithFacebook();
@@ -89,7 +89,7 @@ class UserRepository implements AuthBase {
   @override
   Future<UserModel> createUserWithEmailandPassword(
       String eMail, String sifre) async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return await _fakeAuthService.createUserWithEmailandPassword(
           eMail, sifre);
     } else {
@@ -107,7 +107,7 @@ class UserRepository implements AuthBase {
   @override
   Future<UserModel> signInWithEmailandPassword(
       String eMail, String sifre) async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return await _fakeAuthService.signInWithEmailandPassword(eMail, sifre);
     } else {
       UserModel? _userModel =
@@ -117,7 +117,7 @@ class UserRepository implements AuthBase {
   }
 
   Future<bool> updateUserName(String userID, String newUserName) async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return false;
     } else {
       return await _fireStoreDBService.updateUserName(userID, newUserName);
@@ -126,7 +126,7 @@ class UserRepository implements AuthBase {
 
   Future<String> uploadFile(
       String userID, String fileType, File? profilePhoto) async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return 'file_download_link';
     } else {
       var profilFotoUrl = await _firebaseStorageService.uploadFile(
@@ -138,7 +138,7 @@ class UserRepository implements AuthBase {
 
   Stream<List<MyMessageClass>> getMessages(
       String currentUserID, String chattingUserID) {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return const Stream.empty();
     } else {
       return _fireStoreDBService.getMessages(currentUserID, chattingUserID);
@@ -146,7 +146,7 @@ class UserRepository implements AuthBase {
   }
 
   Future<bool> saveMessage(MyMessageClass toBeSavedMessage) async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return true;
     } else {
       return _fireStoreDBService.saveMessage(toBeSavedMessage);
@@ -154,7 +154,7 @@ class UserRepository implements AuthBase {
   }
 
   Future<List<ChatsModel>> getAllConversations(String userID) async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return [];
     } else {
       DateTime _time = await _fireStoreDBService.showDate(userID);
@@ -208,7 +208,7 @@ class UserRepository implements AuthBase {
 
   Future<List<UserModel>> getUserWithPagination(
       UserModel? lastGetUser, int toBeGetUserCount) async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return [];
     } else {
       // kullanıcı listesi yenilenmediği zaman sohbetlerde kullanıcı listesinin
@@ -228,7 +228,7 @@ class UserRepository implements AuthBase {
       String interlocutorUserID,
       MyMessageClass? lastMessage,
       int toGetElementCount) async {
-    if (appMode == AppMode.DEBUGMODE) {
+    if (appMode == AppMode.debugmode) {
       return [];
     } else {
       return await _fireStoreDBService.getMessageWithPagination(

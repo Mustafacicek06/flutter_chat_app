@@ -40,7 +40,7 @@ class FireStoreDBService implements DBBase {
         _readUser.data() as Map<String, dynamic>;
 
     UserModel _readUserObject = UserModel.fromMap(_readUserInfoMap);
-    print('okunan user nesnesi : ' + _readUserObject.toString());
+    debugPrint('okunan user nesnesi : ' + _readUserObject.toString());
     return _readUserObject;
   }
 
@@ -63,6 +63,7 @@ class FireStoreDBService implements DBBase {
     }
   }
 
+  @override
   Future<bool> updateProfilePhoto(String userID, String profilFotoUrl) async {
     // database'de daha önceden böyle bir isim kullanılmış işe başarısız işlem
 
@@ -146,7 +147,6 @@ class FireStoreDBService implements DBBase {
       "olusturulma_tarihi": FieldValue.serverTimestamp(),
     });
 
-    ;
     // fromMe degerini true verdigim için tekrar false olarak güncellemem gerek
     // çünkü sırada karşı tarafın mesaj documentini yazacağız
     _toBeSavedMessageMapStructure.update("fromMe", (value) => false);

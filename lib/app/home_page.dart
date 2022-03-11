@@ -8,6 +8,7 @@ import 'package:flutter_chat_app/model/user.dart';
 import 'package:flutter_chat_app/viewmodel/all_users_view_model.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
   UserModel? userModel;
   HomePage({
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   Map<TabItem, Widget> allPages() {
     return {
       TabItem.kullanicilar: ChangeNotifierProvider(
-          create: (context) => AllUsersViewModel(), child: UsersPage()),
+          create: (context) => AllUsersViewModel(), child: const UsersPage()),
       TabItem.sohbetler: const ChatPage(),
       TabItem.profil: const ProfilPage(),
     };
@@ -60,7 +61,7 @@ class _HomePageState extends State<HomePage> {
               });
             }
 
-            print('Seçilen Tab item : ' + secilenTab.toString());
+            debugPrint('Seçilen Tab item : ' + secilenTab.toString());
           }),
     );
   }

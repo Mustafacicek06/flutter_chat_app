@@ -6,7 +6,7 @@ import 'package:flutter_chat_app/model/user.dart';
 import 'package:flutter_chat_app/viewmodel/user_model.dart';
 import 'package:provider/provider.dart';
 
-enum FormType { Register, LogIn }
+enum FormType { register, login }
 
 class EmailAndLoginSignPage extends StatefulWidget {
   const EmailAndLoginSignPage({Key? key}) : super(key: key);
@@ -17,9 +17,10 @@ class EmailAndLoginSignPage extends StatefulWidget {
 
 class _EmailSignInAndLoginState extends State<EmailAndLoginSignPage> {
   @override
+  // ignore: override_on_non_overriding_member
   String _email = '', _sifre = '';
   String _butonText = '', _linkText = '';
-  var _formType = FormType.LogIn;
+  var _formType = FormType.login;
 
   final emailEditinController = TextEditingController();
   final textEditinController = TextEditingController();
@@ -32,7 +33,7 @@ class _EmailSignInAndLoginState extends State<EmailAndLoginSignPage> {
     //  Kayıt ol durumunda ise hesap oluşturulması için
     // Giriş yapma durumunda ise giriş yapması için butonumuzu ayarlarıyoruz.
     final _userModel = Provider.of<UserViewModel>(context, listen: false);
-    if (_formType == FormType.LogIn) {
+    if (_formType == FormType.login) {
       try {
         UserModel? _signInUser =
             await _userModel.signInWithEmailandPassword(_email, _sifre);
@@ -85,8 +86,8 @@ class _EmailSignInAndLoginState extends State<EmailAndLoginSignPage> {
           PlatformResponsiveAlertDialog(
             anaButonYazisi: "Tamam",
             baslik: "Kullanıcı Oluşturma HATA",
-            icerik: 'En az 8 karakterden Oluşmalı.\n' +
-                'Harflerin yanı sıra, rakam ve “?, @, !, #, %, +, -, *, %” gibi özel karakterler içermeli.\n' +
+            icerik: 'En az 8 karakterden Oluşmalı.\n'
+                'Harflerin yanı sıra, rakam ve “?, @, !, #, %, +, -, *, %” gibi özel karakterler içermeli.\n'
                 'Büyük ve küçük harfler bir arada kullanılmalı.',
           ).myShowMethod(context);
         } else if (e.code == 'email-already-in-use') {
@@ -114,13 +115,14 @@ class _EmailSignInAndLoginState extends State<EmailAndLoginSignPage> {
   void _degistir() {
     setState(() {
       _formType =
-          _formType == FormType.LogIn ? FormType.Register : FormType.LogIn;
+          _formType == FormType.login ? FormType.register : FormType.login;
     });
   }
 
+  @override
   Widget build(BuildContext context) {
-    _butonText = _formType == FormType.LogIn ? "Giriş Yap" : "Kayıt Ol";
-    _linkText = _formType == FormType.LogIn ? "Hesap Oluşturun" : "Giriş Yapın";
+    _butonText = _formType == FormType.login ? "Giriş Yap" : "Kayıt Ol";
+    _linkText = _formType == FormType.login ? "Hesap Oluşturun" : "Giriş Yapın";
     final _userModel = Provider.of<UserViewModel>(context, listen: false);
 
     return Scaffold(

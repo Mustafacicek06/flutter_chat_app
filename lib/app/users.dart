@@ -20,10 +20,11 @@ class _UsersPageState extends State<UsersPage> {
 
   // sayfanın sonuna vardığını anlamamız için
   // sayfanın sonunu dinlememiz için
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
 
     // built edilmeden önce bizim context'e ihtiyacımız oldugu için hata verdi
@@ -90,7 +91,7 @@ class _UsersPageState extends State<UsersPage> {
       onRefresh: _allUsersViewModel.refresh,
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        child: Container(
+        child: SizedBox(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +130,7 @@ class _UsersPageState extends State<UsersPage> {
             create: (context) => ChatViewModel(
                 currentUser: _userViewModel.user!,
                 interlocutorUser: _currentUser),
-            child: Chat(),
+            child: const Chat(),
           ),
         ));
       },

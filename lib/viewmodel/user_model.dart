@@ -8,10 +8,10 @@ import 'package:flutter_chat_app/model/user.dart';
 import 'package:flutter_chat_app/repository/user_repository.dart';
 import 'package:flutter_chat_app/services/auth_base.dart';
 
-enum ViewState { Idle, Busy }
+enum ViewState { idle, busy }
 
 class UserViewModel with ChangeNotifier implements AuthBase {
-  ViewState _state = ViewState.Idle;
+  ViewState _state = ViewState.idle;
 
   final UserRepository _userRepository = locator<UserRepository>();
 
@@ -38,7 +38,7 @@ class UserViewModel with ChangeNotifier implements AuthBase {
   @override
   Future<UserModel?> currentUser() async {
     try {
-      state = ViewState.Busy;
+      state = ViewState.busy;
       _user = await _userRepository.currentUser();
       if (_user != null) {
         return _user;
@@ -51,14 +51,14 @@ class UserViewModel with ChangeNotifier implements AuthBase {
     }
     // her iki durumda'da burası çalışacak.
      finally {
-      state = ViewState.Idle;
+      state = ViewState.idle;
     }
   }
 
   @override
   Future<UserModel?> signInAnonymously() async {
     try {
-      state = ViewState.Busy;
+      state = ViewState.busy;
       _user = await _userRepository.signInAnonymously();
       return _user;
     } catch (e) {
@@ -67,14 +67,14 @@ class UserViewModel with ChangeNotifier implements AuthBase {
     }
     // her iki durumda'da burası çalışacak.
      finally {
-      state = ViewState.Idle;
+      state = ViewState.idle;
     }
   }
 
   @override
   Future<bool> signOut() async {
     try {
-      state = ViewState.Busy;
+      state = ViewState.busy;
       bool result = await _userRepository.signOut();
       _user = null;
       return result;
@@ -84,14 +84,14 @@ class UserViewModel with ChangeNotifier implements AuthBase {
     }
     // her iki durumda'da burası çalışacak.
      finally {
-      state = ViewState.Idle;
+      state = ViewState.idle;
     }
   }
 
   @override
   Future<UserModel> signInWithGoogle() async {
     try {
-      state = ViewState.Busy;
+      state = ViewState.busy;
       _user = await _userRepository.signInWithGoogle();
       return _user!;
     } catch (e) {
@@ -100,14 +100,14 @@ class UserViewModel with ChangeNotifier implements AuthBase {
     }
     // her iki durumda'da burası çalışacak.
      finally {
-      state = ViewState.Idle;
+      state = ViewState.idle;
     }
   }
 
   @override
   Future<UserModel> signInWithFacebook() async {
     try {
-      state = ViewState.Busy;
+      state = ViewState.busy;
       _user = await _userRepository.signInWithFacebook();
       return _user!;
     } catch (e) {
@@ -116,7 +116,7 @@ class UserViewModel with ChangeNotifier implements AuthBase {
     }
     // her iki durumda'da burası çalışacak.
      finally {
-      state = ViewState.Idle;
+      state = ViewState.idle;
     }
   }
 
@@ -125,13 +125,13 @@ class UserViewModel with ChangeNotifier implements AuthBase {
       String eMail, String sifre) async {
     if (_emailSifreKontrol(eMail, sifre)) {
       try {
-        state = ViewState.Busy;
+        state = ViewState.busy;
         _user =
             await _userRepository.createUserWithEmailandPassword(eMail, sifre);
 
         return _user!;
       } finally {
-        state = ViewState.Idle;
+        state = ViewState.idle;
       }
     } else {
       return null;
@@ -143,7 +143,7 @@ class UserViewModel with ChangeNotifier implements AuthBase {
       String eMail, String sifre) async {
     try {
       if (_emailSifreKontrol(eMail, sifre)) {
-        state = ViewState.Busy;
+        state = ViewState.busy;
         _user = await _userRepository.signInWithEmailandPassword(eMail, sifre);
         return _user!;
       } else {
@@ -151,7 +151,7 @@ class UserViewModel with ChangeNotifier implements AuthBase {
         return user!;
       }
     } finally {
-      state = ViewState.Idle;
+      state = ViewState.idle;
     }
 
     // her iki durumda'da burası çalışacak.

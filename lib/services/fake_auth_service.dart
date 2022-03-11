@@ -11,12 +11,13 @@ class FakeAuthService implements AuthBase {
 
   @override
   Future<UserModel> signInAnonymously() async {
-    return await Future.delayed(Duration(seconds: 2),
+    return await Future.delayed(const Duration(seconds: 2),
         () => UserModel(userID: userID, email: 'fakeuser@fake.com'));
   }
 
   @override
   Future<bool> signOut() {
+    // ignore: todo
     // TODO: implement signOut
 
     return Future.value(true);
@@ -25,7 +26,7 @@ class FakeAuthService implements AuthBase {
   @override
   Future<UserModel> signInWithGoogle() async {
     return await Future.delayed(
-        Duration(seconds: 2),
+        const Duration(seconds: 2),
         () => UserModel(
             userID: 'google_user_id_213', email: 'fakeuser@fake.com'));
   }
@@ -33,7 +34,7 @@ class FakeAuthService implements AuthBase {
   @override
   Future<UserModel> signInWithFacebook() async {
     return await Future.delayed(
-        Duration(seconds: 2),
+        const Duration(seconds: 2),
         () => UserModel(
             userID: 'facebook_user_id_1234', email: 'fakeuser@fake.com'));
   }
@@ -42,7 +43,7 @@ class FakeAuthService implements AuthBase {
   Future<UserModel> createUserWithEmailandPassword(
       String eMail, String sifre) async {
     return await Future.delayed(
-        Duration(seconds: 2),
+        const Duration(seconds: 2),
         () => UserModel(
             userID: 'created_user_id_!23123', email: 'fakeuser@fake.com'));
   }
@@ -50,7 +51,7 @@ class FakeAuthService implements AuthBase {
   @override
   Future<UserModel> signInWithEmailandPassword(
       String eMail, String sifre) async {
-    return await Future.delayed(Duration(seconds: 2),
+    return await Future.delayed(const Duration(seconds: 2),
         () => UserModel(userID: 'sign_in_user', email: 'fakeuser@fake.com'));
   }
 }

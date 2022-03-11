@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 
 abstract class PlatformResponsiveWidget extends StatelessWidget {
+  const PlatformResponsiveWidget({Key? key}) : super(key: key);
+
   Widget buildAndroidWidget(BuildContext context);
   Widget buildIOSWidget(BuildContext context);
 
