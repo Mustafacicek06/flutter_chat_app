@@ -22,4 +22,4 @@ CHATTING PAGE
 
 PROFILE PAGE 
 
-![mesaj](https://user-images.githubusercontent.com/52332960/158656696-8ac62798-2e39-4048-a21e-29db572a3fc2.png)
+![profil](https://user-images.githubusercontent.com/52332960/158656902-2807157b-e36e-4020-991a-7c6bdb80cbef.png)
